@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD agenda</title>
+</head>
+<body>
+    <!-- Crie uma agenda de contatos que permita adicionar, visualizar, editar e excluir contatos (CRUD).
+    Utilize switch-case, while, funções, devidas validações e estruturas condicionais para gerenciar as operações.
+
+    Os contatos serão adicionados pelo nome, número e email;
+
+    Desafio:
+    Ao cadastrar um novo contato nessa agenda, faça com que cadastre também a data e hora atual que esse novo contato foi adicionado à agenda. 
+    Faça isso através do método Date para retornar a data e a hora atual (de acordo com o sistema) -->
+
+    <script>
+        let arrContatos = [];
+
+        function showMenu() {
+            return parseInt(prompt(`
+            ******Menu da agenda******
+            [1] - Adicionar novo contato
+            [2] - Listar contatos
+            [3] - Atualizar contatos
+            [4] - Excluir contatos
+            [5] - Sair da agenda
+            `));
+        }
+
+        //Método sw cadastro de contato => (Verbo HTTP: POST);
+        const AddContato = () => {
+            const nameContact = prompt('Informe o nome do contato que deseja adicionar: ');
+            const numContact = parseInt(prompt('Digite o número do contato que deseja adicionar: '));
+            const emailContact = prompt('Informe o e-mail do contato: ');
+
+            if(!nameContact || !numContact || !emailContact) {
+                alert('Os campos são obrigatórios.');
+            }
+            arrContatos.push({ nameContact, numContact });
+        }
+        //AddContato();
+
+        //Método de listagem dos contatos => (Verbo HTTP: GET);
+        const ListContact = () => {
+            let listContact = '';
+            arrContatos.forEach((dataUser) => {
+                listContact += `
+                Nome: ${dataUser.nameContact}, Número: ${dataUser.numContact} e E-mail: ${emailContact}
+                `
+            });
+            alert(`
+            ******Lista de Contatos******
+            ${listContact}`);
+        }
+        ListContact();
+
+        //Método de atualizar lista de contatos => (Verbo HTTP: PUT);
+        
+
+    </script>
+</body>
+</html>

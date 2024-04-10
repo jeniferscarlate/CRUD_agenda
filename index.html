@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jenifer Scarlate">
-    <title>CRUD agenda</title>
+    <title>CRUD Agenda</title>
 </head>
 <body>
     <script>
@@ -27,6 +27,13 @@
             const nameContact = prompt('Informe o nome do contato que deseja adicionar: ');
             const numContact = parseInt(prompt('Digite o número do contato que deseja adicionar: '));
 
+            const numRegex = /^\([1-9]{2}\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$/;
+
+            if(!numRegex.test(numContact)) {
+                alert('O número de telefone não está no formato esperado. Tente novamente.');
+                return;
+            }
+
             const emailContact = prompt('Informe o e-mail do contato: ');
 
             if (!nameContact || !numContact || !emailContact) {
@@ -40,7 +47,6 @@
 
             arrContacts.push({ nameContact, numContact, emailContact, currentDate, formattedDate, formattedTime });
         }
-        //AddContact();
 
         //Método de listagem dos contatos => (Verbo HTTP: GET);
         const ListContact = () => {
@@ -59,7 +65,6 @@
             ******Lista de Contatos******
             ${listContact}`);
         }
-        //ListContact();
 
         //Método de atualizar lista de contatos => (Verbo HTTP: PUT);
         function UpdateContactInfo() {
@@ -81,8 +86,6 @@
 
             alert('Usuário atualizado com sucesso.');
         }
-
-        //UpdateContactInfo();
 
         //Método para deletar => Verbo HTTP (DELETE);
         function DeleteContact() {

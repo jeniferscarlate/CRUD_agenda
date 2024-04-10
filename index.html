@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Jenifer Scarlate">
     <title>CRUD agenda</title>
 </head>
 <body>
@@ -16,49 +17,123 @@
     Faça isso através do método Date para retornar a data e a hora atual (de acordo com o sistema) -->
 
     <script>
-        let arrContatos = [];
+        let arrContacts = [];
 
         function showMenu() {
             return parseInt(prompt(`
-            ******Menu da agenda******
+            ******Menu da Agenda******
+
             [1] - Adicionar novo contato
             [2] - Listar contatos
-            [3] - Atualizar contatos
-            [4] - Excluir contatos
+            [3] - Atualizar contato
+            [4] - Excluir contato
             [5] - Sair da agenda
             `));
         }
 
-        //Método sw cadastro de contato => (Verbo HTTP: POST);
-        const AddContato = () => {
+        //Método de cadastro de contato => (Verbo HTTP: POST);
+        const AddContact = () => {
             const nameContact = prompt('Informe o nome do contato que deseja adicionar: ');
             const numContact = parseInt(prompt('Digite o número do contato que deseja adicionar: '));
             const emailContact = prompt('Informe o e-mail do contato: ');
 
-            if(!nameContact || !numContact || !emailContact) {
+            if (!nameContact || !numContact || !emailContact) {
                 alert('Os campos são obrigatórios.');
             }
-            arrContatos.push({ nameContact, numContact });
+
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+            const formattedTime = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+
+            arrContacts.push({ nameContact, numContact, emailContact, currentDate, formattedDate, formattedTime });
         }
-        //AddContato();
+        //AddContact();
 
         //Método de listagem dos contatos => (Verbo HTTP: GET);
         const ListContact = () => {
             let listContact = '';
-            arrContatos.forEach((dataUser) => {
+            arrContacts.forEach((dataUser) => {
                 listContact += `
-                Nome: ${dataUser.nameContact}, Número: ${dataUser.numContact} e E-mail: ${emailContact}
+                Nome: ${dataUser.nameContact}
+                Número: ${dataUser.numContact}
+                E-mail: ${dataUser.emailContact}
+                Data do cadastro: ${dataUser.formattedDate}
+                Hora do cadastro: ${dataUser.formattedTime}
+                --------------------------------
                 `
             });
             alert(`
             ******Lista de Contatos******
             ${listContact}`);
         }
-        ListContact();
+        //ListContact();
 
         //Método de atualizar lista de contatos => (Verbo HTTP: PUT);
-        
+        function UpdateContactInfo() {
+            const findNum = parseInt(prompt('Informe o número do contato que você deseja atualizar: '));
+            const usuarioEncontrado = arrContacts.find(num => num.numContact === findNum);
+            
+            if (!usuarioEncontrado) {
+                alert('Contato não encontrado. Tente novamente.');
+                return;
+            }
 
+            const newNumber = parseInt(prompt('Informe o novo número do contato: '));
+            const newEmail = prompt('Informe um novo e-mail para o contato: ');
+            const newName = prompt('Informe um novo nome para o contato: ');
+
+            newNumber ? usuarioEncontrado.numContact = newNumber : null;
+            newEmail ? usuarioEncontrado.emailContact = newEmail : null;
+            newName ? usuarioEncontrado.nameContact = newName : null;
+
+            alert('Usuário atualizado com sucesso.');
+        }
+
+        //UpdateContactInfo();
+
+        //Método para deletar => Verbo HTTP (DELETE);
+        function DeleteContact() {
+            const deletenum = parseInt(prompt('Informe o número do contato que você deseja deletar: '));
+
+            const indiceDelete = arrContacts.findIndex(num => num.numContact === deletenum);
+
+            // if (!indiceDelete) {
+            //     alert('O contato não foi encontrado');
+            // }
+
+            const confirmacao = window.confirm(`Você realmente deseja excluir o contato de ${deletenum}?`);
+
+            if(confirmacao) {
+                arrContacts.splice(indiceDelete, 1);
+            }
+            alert('O contato foi deletado com sucesso.');
+        }
+
+        let opcaoUser = true;
+
+        while(opcaoUser) {
+            switch(showMenu()) {
+                case 1:
+                    AddContact();
+                    break;
+                case 2:
+                    ListContact();
+                    break;
+                case 3:
+                    UpdateContactInfo();
+                    break;
+                case 4: 
+                    DeleteContact();
+                    break;
+                case 5: 
+                    alert('Saindo da agenda, até mais.');
+                    opcaoUser = false;
+                    break;
+                default: 
+                    alert('Opção inválida, tente novamente.');
+                    break;           
+            }
+        }
     </script>
 </body>
 </html>

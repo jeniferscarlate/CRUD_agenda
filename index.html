@@ -68,7 +68,7 @@
 
         //Método de atualizar lista de contatos => (Verbo HTTP: PUT);
         function UpdateContactInfo() {
-            const findNum = (prompt('Informe o número do contato que você deseja atualizar: '));
+            const findNum = (prompt('Informe o número do contato que você deseja atualizar seguindo o padrão (xx) xxxxx-xxxx: '));
             const usuarioEncontrado = arrContacts.find(num => num.numContact === findNum);
             
             if (!usuarioEncontrado) {
@@ -76,7 +76,7 @@
                 return;
             }
 
-            const newNumber = (prompt('Informe o novo número do contato: '));
+            const newNumber = (prompt('Informe o novo número do contato seguindo o padrão (xx) xxxxx-xxxx: '));
             const newEmail = prompt('Informe um novo e-mail para o contato: ');
             const newName = prompt('Informe um novo nome para o contato: ');
 
@@ -89,7 +89,7 @@
 
         //Método para deletar => Verbo HTTP (DELETE);
         function DeleteContact() {
-            const deleteNum = prompt('Informe o número do contato que você deseja deletar: ');
+            const deleteNum = prompt('Informe o número do contato que você deseja deletar seguindo o padrão (xx) xxxxx-xxxx: ');
 
             const indiceDelete = arrContacts.findIndex(num => num.numContact === deleteNum);
 

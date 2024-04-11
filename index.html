@@ -25,7 +25,7 @@
         //Método de cadastro de contato => (Verbo HTTP: POST);
         const AddContact = () => {
             const nameContact = prompt('Informe o nome do contato que deseja adicionar: ');
-            const numContact = prompt('Digite o número do contato que deseja adicionar: ');
+            const numContact = prompt('Digite o número do contato que deseja adicionar seguindo o padrão (xx) xxxxx-xxxx: ');
 
             const numRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
 

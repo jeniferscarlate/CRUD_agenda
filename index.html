@@ -25,9 +25,9 @@
         //Método de cadastro de contato => (Verbo HTTP: POST);
         const AddContact = () => {
             const nameContact = prompt('Informe o nome do contato que deseja adicionar: ');
-            const numContact = parseInt(prompt('Digite o número do contato que deseja adicionar: '));
+            const numContact = prompt('Digite o número do contato que deseja adicionar: ');
 
-            const numRegex = /^\([1-9]{2}\) (?:[2-8]|9[0-9])[0-9]{3}\-[0-9]{4}$/;
+            const numRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
 
             if(!numRegex.test(numContact)) {
                 alert('O número de telefone não está no formato esperado. Tente novamente.');
@@ -68,7 +68,7 @@
 
         //Método de atualizar lista de contatos => (Verbo HTTP: PUT);
         function UpdateContactInfo() {
-            const findNum = parseInt(prompt('Informe o número do contato que você deseja atualizar: '));
+            const findNum = (prompt('Informe o número do contato que você deseja atualizar: '));
             const usuarioEncontrado = arrContacts.find(num => num.numContact === findNum);
             
             if (!usuarioEncontrado) {
@@ -76,7 +76,7 @@
                 return;
             }
 
-            const newNumber = parseInt(prompt('Informe o novo número do contato: '));
+            const newNumber = (prompt('Informe o novo número do contato: '));
             const newEmail = prompt('Informe um novo e-mail para o contato: ');
             const newName = prompt('Informe um novo nome para o contato: ');
 
@@ -89,7 +89,7 @@
 
         //Método para deletar => Verbo HTTP (DELETE);
         function DeleteContact() {
-            const deleteNum = parseInt(prompt('Informe o número do contato que você deseja deletar: '));
+            const deleteNum = prompt('Informe o número do contato que você deseja deletar: ');
 
             const indiceDelete = arrContacts.findIndex(num => num.numContact === deleteNum);
 
